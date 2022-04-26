@@ -23,6 +23,11 @@ jobs:
       packageType: 'sdk'
       version: '2.1.x'
       performMultiLevelLookup: true
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '6.0.x'
+      performMultiLevelLookup: true      
   - task: DotNetCoreCLI@2
     inputs:
       command: 'run'
