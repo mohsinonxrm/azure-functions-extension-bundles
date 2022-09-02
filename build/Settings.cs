@@ -121,6 +121,15 @@ namespace Build
             },
             new BuildConfiguration()
             {
+                ConfigId = ConfigId.NetCoreApp3_linux_arm64,
+                SourceProjectFileName = "extensions_netcoreapp3.csproj",
+                RuntimeIdentifier = "linux-arm64",
+                SuppressTfmSupportBuildWarnings = false,
+                PublishReadyToRun = true,
+                PublishBinDirectorySubPath = Path.Combine("bin_v3", "linux-arm64")
+            },
+            new BuildConfiguration()
+            {
                 ConfigId = ConfigId.NetCoreApp3_any_any,
                 SourceProjectFileName = "extensions_netcoreapp3.csproj",
                 RuntimeIdentifier = "any",
@@ -136,7 +145,8 @@ namespace Build
             NetCoreApp3_win_x64,
             NetCoreApp2_any_any,
             NetCoreApp3_any_any,
-            NetCoreApp3_linux_x64
+            NetCoreApp3_linux_x64,
+            NetCoreApp3_linux_arm64
         }
 
         public static BundlePackageConfiguration BundlePackageNetCoreV2Any = new BundlePackageConfiguration()
@@ -174,6 +184,16 @@ namespace Build
             ConfigBinariesToInclude = new List<ConfigId>() {
                 ConfigId.NetCoreApp3_any_any,
                 ConfigId.NetCoreApp3_linux_x64
+            },
+            CsProjFilePath = Path.Combine(RootBuildDirectory, ConfigId.NetCoreApp3_any_any.ToString(), "extensions.csproj")
+        };
+
+        public static BundlePackageConfiguration BundlePackageNetCoreV3LinuxARM64 = new BundlePackageConfiguration()
+        {
+            PackageIdentifier = "linux-arm64",
+            ConfigBinariesToInclude = new List<ConfigId>() {
+                ConfigId.NetCoreApp3_any_any,
+                ConfigId.NetCoreApp3_linux_arm64
             },
             CsProjFilePath = Path.Combine(RootBuildDirectory, ConfigId.NetCoreApp3_any_any.ToString(), "extensions.csproj")
         };
