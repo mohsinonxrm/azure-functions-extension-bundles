@@ -41,6 +41,14 @@ cd build
 dotnet run skip:dotnet run skip:PackageNetCoreV2Bundle,PackageNetCoreV3BundlesWindows,CreateRUPackage,CreateCDNStoragePackage,CreateCDNStoragePackageWindows,BuildBundleBinariesForWindows,DownloadManifestUtility,RunManifestUtilityWindows,RunManifestUtilityLinux
 ```
 
+
+### Linux ARM64
+```
+cd build
+
+dotnet run skip:dotnet run skip:PackageNetCoreV2Bundle,PackageNetCoreV3BundlesWindows,PackageNetCoreV3BundlesLinux,CreateRUPackage,CreateCDNStoragePackage,CreateCDNStoragePackageWindows,CreateCDNStoragePackageLinux,BuildBundleBinariesForWindows,BuildBundleBinariesForLinux,DownloadManifestUtility,RunManifestUtilityWindows,RunManifestUtilityLinux,RunManifestUtilityLinux,RunManifestUtilityLinuxARM64
+```
+
 ## Add extension to a extension bundle
 1. Identify the bundle version you want to update and checkout the corresponding branch
 
