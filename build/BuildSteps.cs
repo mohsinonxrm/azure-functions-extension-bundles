@@ -95,6 +95,11 @@ namespace Build
             Settings.LinuxBuildConfigurations.ForEach((config) => BuildExtensionsBundle(config));
         }
 
+        public static void BuildBundleBinariesForLinuxARM64()
+        {
+            Settings.LinuxARM64BuildConfigurations.ForEach((config) => BuildExtensionsBundle(config));
+        }
+
         public static string GenerateBundleProjectFile(BuildConfiguration buildConfig)
         {
             var sourceNugetConfig = Path.Combine(Settings.SourcePath, Settings.NugetConfigFileName);
@@ -146,6 +151,11 @@ namespace Build
         public static void RunManifestUtilityLinux()
         {
             Settings.LinuxBuildConfigurations.ForEach((config) => RunManifestUtility(config));
+        }
+
+        public static void RunManifestUtilityLinuxARM64()
+        {
+            Settings.LinuxARM64BuildConfigurations.ForEach((config) => RunManifestUtility(config));
         }
 
         public static void RunManifestUtility(BuildConfiguration buildConfig)
@@ -255,7 +265,8 @@ namespace Build
             {
                 // find the build configuration matching the config id
                 var buildConfig = Settings.WindowsBuildConfigurations.FirstOrDefault(b => b.ConfigId == packageConfig) ??
-                    Settings.LinuxBuildConfigurations.FirstOrDefault(b => b.ConfigId == packageConfig);
+                    Settings.LinuxBuildConfigurations.FirstOrDefault(b => b.ConfigId == packageConfig) ??
+                    Settings.LinuxARM64BuildConfigurations.FirstOrDefault(b => b.ConfigId == packageConfig);
 
                 string targetBundleBinariesPath = Path.Combine(bundlePath, buildConfig.PublishBinDirectorySubPath);
 
