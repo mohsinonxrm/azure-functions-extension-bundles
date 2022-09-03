@@ -248,7 +248,8 @@ namespace Build
             {
                 // find the build configuration matching the config id
                 var buildConfig = Settings.WindowsBuildConfigurations.FirstOrDefault(b => b.ConfigId == packageConfig) ??
-                    Settings.LinuxBuildConfigurations.FirstOrDefault(b => b.ConfigId == packageConfig);
+                    Settings.LinuxBuildConfigurations.FirstOrDefault(b => b.ConfigId == packageConfig) ??
+                    Settings.LinuxARM64BuildConfigurations.FirstOrDefault(b => b.ConfigId == packageConfig);
 
                 string targetBundleBinariesPath = Path.Combine(bundlePath, buildConfig.PublishBinDirectorySubPath);
 
