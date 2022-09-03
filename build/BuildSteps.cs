@@ -95,6 +95,11 @@ namespace Build
             Settings.LinuxBuildConfigurations.ForEach((config) => BuildExtensionsBundle(config));
         }
 
+        public static void BuildBundleBinariesForLinuxARM64()
+        {
+            Settings.LinuxARM64BuildConfigurations.ForEach((config) => BuildExtensionsBundle(config));
+        }
+
         public static string GenerateBundleProjectFile(BuildConfiguration buildConfig)
         {
             var sourceNugetConfig = Path.Combine(Settings.SourcePath, Settings.NugetConfigFileName);
@@ -130,7 +135,12 @@ namespace Build
         {
             Settings.LinuxBuildConfigurations.ForEach((config) => RunManifestUtility(config));
         }
-        
+
+        public static void RunManifestUtilityLinuxARM64()
+        {
+            Settings.LinuxARM64BuildConfigurations.ForEach((config) => RunManifestUtility(config));
+        }
+
         public static void RunManifestUtility(BuildConfiguration buildConfig)
         {
             string manifestDll = Path.Combine(Settings.ManifestToolDirectory, "Microsoft.ManifestTool.dll");
@@ -277,6 +287,11 @@ namespace Build
             CreateExtensionBundle(Settings.BundlePackageNetCoreV3Linux);
         }
 
+        public static void PackageNetCoreV3BundlesLinuxARM64()
+        {
+            CreateExtensionBundle(Settings.BundlePackageNetCoreV3LinuxARM64);
+        }
+
         public static void PackageNetCoreV3BundlesWindows()
         {
             CreateExtensionBundle(Settings.BundlePackageNetCoreV3Any);
@@ -375,6 +390,21 @@ namespace Build
                 FileUtility.EnsureDirectoryExists(packageBundleDirectory);
 
                 AddBundleZipFile(packageBundleDirectory, Settings.BundlePackageNetCoreV3Linux);
+
+                string packageZipFilePath = Path.Combine(Settings.ArtifactsDirectory, $"{indexFileMetadata.IndexFileDirectory}_linux.zip");
+                ZipFile.CreateFromDirectory(packageRootDirectoryPath, packageZipFilePath, CompressionLevel.NoCompression, false);
+            }
+        }
+
+        public static void CreateCDNStoragePackageLinuxARM64()
+        {
+            foreach (var indexFileMetadata in Settings.IndexFiles)
+            {
+                string packageRootDirectoryPath = Path.Combine(Settings.RootBinDirectory, $"{indexFileMetadata.IndexFileDirectory}_linux");
+                string packageBundleDirectory = Path.Combine(packageRootDirectoryPath, BundleConfiguration.Instance.ExtensionBundleId, BundleConfiguration.Instance.ExtensionBundleVersion);
+                FileUtility.EnsureDirectoryExists(packageBundleDirectory);
+
+                AddBundleZipFile(packageBundleDirectory, Settings.BundlePackageNetCoreV3LinuxARM64);
 
                 string packageZipFilePath = Path.Combine(Settings.ArtifactsDirectory, $"{indexFileMetadata.IndexFileDirectory}_linux.zip");
                 ZipFile.CreateFromDirectory(packageRootDirectoryPath, packageZipFilePath, CompressionLevel.NoCompression, false);
