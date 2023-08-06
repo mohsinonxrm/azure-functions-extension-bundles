@@ -141,8 +141,8 @@
     "majorVersion": "1",
     "name": "RabbitMQ",
     "bindings": [
-        "rabbitmqtrigger",
-        "rabbitmq"
+      "rabbitmqtrigger",
+      "rabbitmq"
     ]
   },
   {
@@ -150,8 +150,8 @@
     "majorVersion": "3",
     "name": "Kafka",
     "bindings": [
-        "kafkatrigger",
-        "kafka"
+      "kafkatrigger",
+      "kafka"
     ]
   },
   {
@@ -164,5 +164,23 @@
       "webpubsubrequest",
       "webpubsubtrigger"
     ]
+  },
+  {
+    "id": "Azure.Storage.Queues",
+    "majorVersion": "12",
+    "name": "AzureStorageQueues",
+    "bindings": []
+  },
+  {
+    "id": "System.Drawing.Common",
+    "Version": "4.7.2",
+    "name": "SystemDrawingCommon",
+    "bindings": []
+  },
+  {
+    "id": "System.Private.Uri",
+    "Version": "4.3.2",
+    "name": "SystemPrivateUri",
+    "bindings": []
   }
 ]
