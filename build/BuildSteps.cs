@@ -114,6 +114,12 @@ namespace Build
         {
             Settings.LinuxBuildConfigurations.ForEach((config) => BuildExtensionsBundle(config));
         }
+
+        public static void BuildBundleBinariesForLinuxARM64()
+        {
+            Settings.LinuxARM64BuildConfigurations.ForEach((config) => BuildExtensionsBundle(config));
+        }
+
         public static string GenerateBundleProjectFile(BuildConfiguration buildConfig)
         {
             var sourceNugetConfig = Path.Combine(Settings.SourcePath, Settings.NugetConfigFileName);
@@ -165,6 +171,11 @@ namespace Build
         public static void RunManifestUtilityLinux()
         {
             Settings.LinuxBuildConfigurations.ForEach((config) => RunManifestUtility(config));
+        }
+
+        public static void RunManifestUtilityLinuxARM64()
+        {
+            Settings.LinuxARM64BuildConfigurations.ForEach((config) => RunManifestUtility(config));
         }
 
         public static void RunManifestUtility(BuildConfiguration buildConfig)
@@ -274,7 +285,8 @@ namespace Build
             {
                 // find the build configuration matching the config id
                 var buildConfig = Settings.WindowsBuildConfigurations.FirstOrDefault(b => b.ConfigId == packageConfig) ??
-                    Settings.LinuxBuildConfigurations.FirstOrDefault(b => b.ConfigId == packageConfig);
+                    Settings.LinuxBuildConfigurations.FirstOrDefault(b => b.ConfigId == packageConfig) ??
+                    Settings.LinuxARM64BuildConfigurations.FirstOrDefault(b => b.ConfigId == packageConfig);
 
                 string targetBundleBinariesPath = Path.Combine(bundlePath, buildConfig.PublishBinDirectorySubPath);
 
@@ -309,6 +321,12 @@ namespace Build
         {
             CreateExtensionBundle(Settings.BundlePackageNetCoreV3Any);
             CreateExtensionBundle(Settings.BundlePackageNetCoreV3Linux);
+            CreateExtensionBundle(Settings.BundlePackageNetCoreV3LinuxARM64);
+        }
+
+        public static void PackageNetCoreV3BundlesLinuxARM64()
+        {
+            CreateExtensionBundle(Settings.BundlePackageNetCoreV3LinuxARM64);
         }
 
         public static void PackageNetCoreV3BundlesWindows()
@@ -409,6 +427,21 @@ namespace Build
                 FileUtility.EnsureDirectoryExists(packageBundleDirectory);
 
                 AddBundleZipFile(packageBundleDirectory, Settings.BundlePackageNetCoreV3Linux);
+
+                string packageZipFilePath = Path.Combine(Settings.ArtifactsDirectory, $"{indexFileMetadata.IndexFileDirectory}_linux.zip");
+                ZipFile.CreateFromDirectory(packageRootDirectoryPath, packageZipFilePath, CompressionLevel.NoCompression, false);
+            }
+        }
+
+        public static void CreateCDNStoragePackageLinuxARM64()
+        {
+            foreach (var indexFileMetadata in Settings.IndexFiles)
+            {
+                string packageRootDirectoryPath = Path.Combine(Settings.RootBinDirectory, $"{indexFileMetadata.IndexFileDirectory}_linux");
+                string packageBundleDirectory = Path.Combine(packageRootDirectoryPath, BundleConfiguration.Instance.ExtensionBundleId, BundleConfiguration.Instance.ExtensionBundleVersion);
+                FileUtility.EnsureDirectoryExists(packageBundleDirectory);
+
+                AddBundleZipFile(packageBundleDirectory, Settings.BundlePackageNetCoreV3LinuxARM64);
 
                 string packageZipFilePath = Path.Combine(Settings.ArtifactsDirectory, $"{indexFileMetadata.IndexFileDirectory}_linux.zip");
                 ZipFile.CreateFromDirectory(packageRootDirectoryPath, packageZipFilePath, CompressionLevel.NoCompression, false);

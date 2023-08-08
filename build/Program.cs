@@ -21,10 +21,12 @@ namespace Build
                 .Then(PackageNetCoreV3Bundle)
                 .Then(PackageNetCoreV3BundlesWindows)
                 .Then(PackageNetCoreV3BundlesLinux)
+                .Then(PackageNetCoreV3BundlesLinuxARM64)
                 .Then(CreateRUPackage)
                 .Then(CreateCDNStoragePackage)
                 .Then(CreateCDNStoragePackageWindows)
                 .Then(CreateCDNStoragePackageLinux)
+                .Then(CreateCDNStoragePackageLinuxARM64)
                 .Run();
         }
     }
