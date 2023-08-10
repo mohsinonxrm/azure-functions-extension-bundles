@@ -185,9 +185,10 @@ namespace Build
         {
             PackageIdentifier = "linux-arm64",
             ConfigBinariesToInclude = new List<ConfigId>() {
+                ConfigId.NetCoreApp3_any_any,
                 ConfigId.NetCoreApp3_linux_arm64
             },
-            CsProjFilePath = Path.Combine(RootBuildDirectory, ConfigId.NetCoreApp3_linux_arm64.ToString(), "extensions.csproj")
+            CsProjFilePath = Path.Combine(RootBuildDirectory, ConfigId.NetCoreApp3_any_any.ToString(), "extensions.csproj")
         };
 
         public static BundlePackageConfiguration BundlePackageNetCoreV3 = new BundlePackageConfiguration()
