@@ -140,6 +140,15 @@ namespace Build
                 SuppressTfmSupportBuildWarnings = false,
                 PublishReadyToRun = true,
                 PublishBinDirectorySubPath = Path.Combine("bin_v3", "linux-arm64")
+            },
+            new BuildConfiguration()
+            {
+                ConfigId = ConfigId.NetCoreApp3_any_any,
+                SourceProjectFileName = "extensions_netcoreapp3.csproj",
+                RuntimeIdentifier = "any",
+                SuppressTfmSupportBuildWarnings = false,
+                PublishReadyToRun = false,
+                PublishBinDirectorySubPath = "bin"
             }
         };
 
@@ -196,9 +205,10 @@ namespace Build
         {
             PackageIdentifier = "linux-arm64",
             ConfigBinariesToInclude = new List<ConfigId>() {
+                ConfigId.NetCoreApp3_any_any,
                 ConfigId.NetCoreApp3_linux_arm64
             },
-            CsProjFilePath = Path.Combine(RootBuildDirectory, ConfigId.NetCoreApp3_linux_arm64.ToString(), "extensions.csproj")
+            CsProjFilePath = Path.Combine(RootBuildDirectory, ConfigId.NetCoreApp3_any_any.ToString(), "extensions.csproj")
         };
     }
 }
