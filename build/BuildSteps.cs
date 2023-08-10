@@ -290,6 +290,7 @@ namespace Build
 
         public static void PackageNetCoreV3BundlesLinuxARM64()
         {
+            CreateExtensionBundle(Settings.BundlePackageNetCoreV3Any);
             CreateExtensionBundle(Settings.BundlePackageNetCoreV3LinuxARM64);
         }
 
