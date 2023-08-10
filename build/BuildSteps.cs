@@ -320,12 +320,12 @@ namespace Build
         public static void PackageNetCoreV3BundlesLinux()
         {
             CreateExtensionBundle(Settings.BundlePackageNetCoreV3Any);
-            CreateExtensionBundle(Settings.BundlePackageNetCoreV3Linux);
-            CreateExtensionBundle(Settings.BundlePackageNetCoreV3LinuxARM64);
+            CreateExtensionBundle(Settings.BundlePackageNetCoreV3Linux);            
         }
 
         public static void PackageNetCoreV3BundlesLinuxARM64()
         {
+            CreateExtensionBundle(Settings.BundlePackageNetCoreV3Any);
             CreateExtensionBundle(Settings.BundlePackageNetCoreV3LinuxARM64);
         }
 
