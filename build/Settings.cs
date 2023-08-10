@@ -131,6 +131,14 @@ namespace Build
                 RuntimeIdentifier = "linux-arm64",
                 PublishReadyToRun = true,
                 PublishBinDirectorySubPath = Path.Combine("bin_v3", "linux-arm64")
+            },
+            new BuildConfiguration()
+            {
+                ConfigId = ConfigId.NetCoreApp3_any_any,
+                SourceProjectFileName = "extensions_netcoreapp3.csproj",
+                RuntimeIdentifier = "any",
+                PublishReadyToRun = false,
+                PublishBinDirectorySubPath = "bin"
             }
         };
 
